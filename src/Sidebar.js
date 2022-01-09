@@ -6,16 +6,22 @@ function Sidebar({
 	onDeleteNote,
 	activeNote,
 	setActiveNote,
+	darkMode,
+	setDarkMode,
 }) {
 	const sortedNotes = notes.sort((a, b) => b.lastModified - a.lastModified)
+	const newMode = !darkMode
 
 	return (
-		<div className="app-sidebar">
+		<div className={`app-sidebar ${darkMode ? 'black' : 'white'}`}>
 			<div className="app-sidebar-header">
 				<h1>Notes</h1>
 				<button onClick={onAddNote}>Add</button>
 			</div>
-			<div className="app-sidebar-notes ">
+			<div className="app-sidebar-header">
+				<button onClick={() => setDarkMode(newMode)}>Dark Mode</button>
+			</div>
+			<div className="app-sidebar-notes">
 				{sortedNotes.map((note) => (
 					<div
 						onClick={() => setActiveNote(note.id)}

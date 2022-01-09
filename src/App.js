@@ -9,6 +9,7 @@ const LOCAL_STORAGE_KEY = 'Another Password'
 function App() {
 	const [notes, setNotes] = useState([])
 	const [activeNote, setActiveNote] = useState(false)
+	const [darkMode, setDarkMode] = useState(true)
 
 	useEffect(() => {
 		const storedNotes = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
@@ -27,7 +28,7 @@ function App() {
 			lastModified: Date.now(),
 		}
 		setNotes([newNote, ...notes])
-    setActiveNote(newNote.id)
+		setActiveNote(newNote.id)
 	}
 
 	const onUpdateNote = (updatedNote) => {
@@ -54,8 +55,15 @@ function App() {
 				onDeleteNote={onDeleteNote}
 				activeNote={activeNote}
 				setActiveNote={setActiveNote}
+				darkMode={darkMode}
+				setDarkMode={setDarkMode}
 			/>
-			<Main activeNote={getActiveNote()} onUpdateNote={onUpdateNote} />
+			<Main
+				activeNote={getActiveNote()}
+				onUpdateNote={onUpdateNote}
+				darkMode={darkMode}
+				setDarkMode={setDarkMode}
+			/>
 		</div>
 	)
 }
